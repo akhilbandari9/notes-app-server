@@ -15,8 +15,8 @@ router.get('/:id', async (req, res) => {
 	const { id } = req.params
 
 	try {
-		const notes = await Note.find({}).sort({ created: -1 })
-		res.json(notes)
+		const note = await Note.findById(id)
+		res.json(note)
 	} catch (err) {
 		console.log(err)
 		res.status(500).send('Server Error')
