@@ -50,7 +50,7 @@ router.delete('/:id', async (req, res) => {
 	}
 })
 
-router.delete('/all', async (_, res) => {
+router.delete('/delete/all', async (_, res) => {
 	try {
 		await Bin.deleteMany({})
 		res.json({ msg: 'All Bin Notes Deleted' })
