@@ -50,4 +50,14 @@ router.delete('/:id', async (req, res) => {
 	}
 })
 
+router.delete('/all', async (_, res) => {
+	try {
+		await Bin.deleteMany({})
+		res.json({ msg: 'All Bin Notes Deleted' })
+	} catch (err) {
+		console.log(err)
+		res.status(500).send('Server Error')
+	}
+})
+
 module.exports = router
