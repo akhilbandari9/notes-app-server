@@ -7,6 +7,10 @@ const NoteSchema = mongoose.Schema({
 	body: {
 		type: String,
 	},
+	color: {
+		type: String,
+	},
+	labels: [{ type: String }],
 	created: {
 		type: Date,
 		default: Date.now,
