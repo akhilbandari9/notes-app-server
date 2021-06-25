@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const { Note, Bin } = require('../models/Note')
 
-router.get('/', async (req, res) => {
+router.get('/', async (_, res) => {
 	try {
 		const notes = await Note.find({}).sort({ created: -1 })
 		res.json(notes)
@@ -11,6 +11,19 @@ router.get('/', async (req, res) => {
 		res.status(500).send('Server Error')
 	}
 })
+
+router.get('/labels', async (req, res) => {
+	try {
+		const notes = await Note.find({ labels: req.query.label }).sort({
+			created: -1,
+		})
+		res.json(notes)
+	} catch (err) {
+		console.log(err)
+		res.status(500).send('Server Error')
+	}
+})
+
 router.get('/:id', async (req, res) => {
 	const { id } = req.params
 
