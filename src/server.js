@@ -12,6 +12,7 @@ app.use(express.json({ extended: false }))
 
 app.use('/notes', require('./routes/notes'))
 app.use('/bin', require('./routes/bin'))
+app.use('/labels', require('./routes/labels'))
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log(`Server Connected. Running on port ${PORT}`))

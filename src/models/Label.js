@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
-const LabelsSchema = mongoose.Schema({
-	name: {
+const Label = mongoose.Schema({
+	label: {
 		type: String,
 	},
 	created: {
@@ -10,4 +10,4 @@ const LabelsSchema = mongoose.Schema({
 	},
 })
 
-module.exports = mongoose.model('label', LabelsSchema)
+module.exports = mongoose.model('label', Label)
