@@ -84,7 +84,7 @@ router.delete('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => {
 	try {
 		const { id } = req.params
-		const { title, body, color } = req.body
+		const { title, body, color, labels } = req.body
 		const note = Note.findById(id)
 
 		if (!note) res.status(404).json({ msg: 'Note Not Found' })
@@ -93,6 +93,7 @@ router.put('/:id', async (req, res) => {
 		if (title) updatedNote.title = title
 		if (body) updatedNote.body = body
 		if (color) updatedNote.body = color
+		if (label) updatedNote.labels = labels
 		updatedNote.updated = new Date()
 
 		const updatedNoteRes = await Note.findByIdAndUpdate(
