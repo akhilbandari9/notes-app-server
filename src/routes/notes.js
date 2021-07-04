@@ -92,7 +92,7 @@ router.put('/:id', async (req, res) => {
 		let updatedNote = {}
 		if (title) updatedNote.title = title
 		if (body) updatedNote.body = body
-		if (color) updatedNote.body = color
+		if (color) updatedNote.color = color
 		if (labels) updatedNote.labels = labels
 		updatedNote.updated = new Date()
 
