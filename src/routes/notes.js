@@ -93,7 +93,7 @@ router.put('/:id', async (req, res) => {
 		if (title) updatedNote.title = title
 		if (body) updatedNote.body = body
 		if (color) updatedNote.body = color
-		if (label) updatedNote.labels = labels
+		if (labels) updatedNote.labels = labels
 		updatedNote.updated = new Date()
 
 		const updatedNoteRes = await Note.findByIdAndUpdate(
