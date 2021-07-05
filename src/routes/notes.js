@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { Note, Bin } = require('../models/Note')
+const { noteTemplate } = require('../view-templates')
 
 router.get('/', async (_, res) => {
 	try {
@@ -29,7 +30,7 @@ router.get('/:id', async (req, res) => {
 
 	try {
 		const note = await Note.findById(id)
-		res.json(note)
+		res.send(noteTemplate(note))
 	} catch (err) {
 		console.log(err)
 		res.status(500).send('Server Error')
