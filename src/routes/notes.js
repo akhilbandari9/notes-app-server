@@ -30,8 +30,8 @@ router.get('/:id', async (req, res) => {
 
 	try {
 		const note = await Note.findById(id)
-		res.json(note)
-		// res.send(noteTemplate(note))
+		// res.json(note)
+		res.send(noteTemplate(note))
 	} catch (err) {
 		console.log(err)
 		res.status(500).send('Server Error')
