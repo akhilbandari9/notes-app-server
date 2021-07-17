@@ -34,11 +34,11 @@ router.delete('/:id', async (req, res) => {
 		const { id } = req.params
 
 		const note = await Bin.findById(id)
-		const { body, title, updated, created } = note
+		// const { body, title, updated, created } = note
 		if (!note) {
 			res.status(404).json({ msg: 'Note Not Found' })
 		} else {
-			const newNote = new Note({ body, title, updated, created })
+			const newNote = new Note({ ...note })
 			await newNote.save()
 			await Bin.findByIdAndRemove(id)
 
