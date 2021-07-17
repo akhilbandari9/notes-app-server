@@ -3,22 +3,30 @@ const router = express.Router()
 const { Note, Bin } = require('../models/Note')
 const { noteTemplate } = require('../view-templates')
 
-router.get('/', async (_, res) => {
+router.get('/', async (req, res) => {
 	try {
-		const notes = await Note.find({}).sort({ created: -1 })
-		res.json(notes)
-	} catch (err) {
-		console.log(err)
-		res.status(500).send('Server Error')
-	}
-})
-
-router.get('/labels', async (req, res) => {
-	try {
-		const notes = await Note.find({ labels: req.query.label }).sort({
-			created: -1,
-		})
-		res.json(notes)
+		let notes
+		if (req.query.search) {
+			notes = await Note.find({
+				$or: [
+					{
+						title: { $regex: req.query.search, $options: 'i' },
+					},
+					{
+						body: { $regex: req.query.search, $options: 'i' },
+					},
+				],
+			}).sort({ created: -1 })
+			res.json(notes)
+		} else if (req.query.label) {
+			notes = await Note.find({ labels: req.query.label }).sort({
+				created: -1,
+			})
+			res.json(notes)
+		} else {
+			notes = await Note.find({}).sort({ created: -1 })
+			res.json(notes)
+		}
 	} catch (err) {
 		console.log(err)
 		res.status(500).send('Server Error')
